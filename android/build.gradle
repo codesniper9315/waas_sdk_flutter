@@ -1,0 +1,98 @@
+group 'com.coinable.waas_sdk_flutter'
+version '1.0'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.4.0'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        mavenLocal()
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    if (project.android.hasProperty("namespace")) {
+        namespace 'com.coinable.waas_sdk_flutter'
+    }
+
+    compileSdkVersion 31
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 31
+    }
+
+    dependencies {
+        testImplementation 'junit:junit:4.13.2'
+        testImplementation 'org.mockito:mockito-core:5.0.0'
+
+        implementation 'androidx.annotation:annotation:1.3.0'
+        implementation 'androidx.appcompat:appcompat:1.6.1'
+
+        // published to mavenLocal
+        implementation 'com.coinable:go-internal-sdk:1.0.0'
+        implementation 'com.coinable:mpc-sdk:1.0.0'
+    }
+
+    testOptions {
+        unitTests.all {
+            testLogging {
+               events "passed", "skipped", "failed", "standardOut", "standardError"
+               outputs.upToDateWhen {false}
+               showStandardStreams = true
+            }
+        }
+    }
+
+    task goSdkVersion {
+        doLast {
+            println "${project.property("WaasSdk_goInternalSdkVersion")}"
+        }
+    }
+
+    task mpcUtilsVersion {
+        doLast {
+            println "${project.property("WaasSdk_mpcSdkVersion")}"
+        }
+    }
+}
+
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        goInternalSdk(MavenPublication) {
+            groupId 'com.coinable'
+            artifactId 'go-internal-sdk'
+            version '1.0.0'
+            artifact("$projectDir/libs/go-internal-sdk.aar")
+        }
+        mpcSdk(MavenPublication) {
+            groupId 'com.coinable'
+            artifactId 'mpc-sdk'
+            version '1.0.0'
+            artifact("$projectDir/libs/mpc-sdk.aar")
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
