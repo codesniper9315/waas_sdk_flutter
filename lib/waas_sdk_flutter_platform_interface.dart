@@ -27,7 +27,7 @@ abstract class WaasSdkFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  Future<void> initMPCSdk() {
+  Future<void> initMPCSdk(bool isSimulator) {
     throw UnimplementedError('initMPCSdk() has not been implemented');
   }
 

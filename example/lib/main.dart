@@ -31,8 +31,8 @@ class _MyAppState extends State<MyApp> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
-      platformVersion =
-          await _waasSdkFlutterPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _waasSdkFlutterPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -47,6 +47,17 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void initMPCSdk() {
+    _waasSdkFlutterPlugin.initMPCSdk(true).then((value) {
+      _waasSdkFlutterPlugin.bootstrapDevice('passcode123').then((value) {
+        _waasSdkFlutterPlugin
+            .getRegistrationData()
+            .then((value) => print('====registration data: $value'))
+            .catchError((e) => print('====registrationDevice error: $e'));
+      }).catchError((e) => print('====bootstrapDevice error: $e'));
+    }).catchError((e) => print('====mpcsdk initialize error: $e'));
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -56,6 +67,10 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: Text('Running on: $_platformVersion\n'),
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: initMPCSdk,
+          label: const Text('MPC Sdk Tutorial'),
         ),
       ),
     );

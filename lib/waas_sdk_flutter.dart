@@ -5,8 +5,8 @@ class WaasSdkFlutter {
     return WaasSdkFlutterPlatform.instance.getPlatformVersion();
   }
 
-  Future<void> initMPCSdk() {
-    return WaasSdkFlutterPlatform.instance.initMPCSdk();
+  Future<void> initMPCSdk(bool isSimulator) {
+    return WaasSdkFlutterPlatform.instance.initMPCSdk(isSimulator);
   }
 
   Future<void> bootstrapDevice(String passcode) {

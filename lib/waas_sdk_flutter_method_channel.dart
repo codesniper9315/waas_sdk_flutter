@@ -32,13 +32,18 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<void> initMPCSdk() async {
-    await mpcSDKMethodChannel.invokeMethod<void>('initialize');
+  Future<void> initMPCSdk(bool isSimulator) async {
+    await mpcSDKMethodChannel.invokeMethod<void>(
+      'initialize',
+      {'isSimulator': isSimulator},
+    );
   }
 
   @override
   Future<void> bootstrapDevice(String passcode) async {
-    await mpcSDKMethodChannel.invokeMethod<void>('bootstrapDevice');
+    await mpcSDKMethodChannel.invokeMethod<void>('bootstrapDevice', {
+      'passcode': passcode,
+    });
   }
 
   @override

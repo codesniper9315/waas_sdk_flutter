@@ -102,7 +102,7 @@ class MockWaasSdkFlutterPlatform
   }
 
   @override
-  Future<void> initMPCSdk() {
+  Future<void> initMPCSdk(bool isSimulator) {
     throw UnimplementedError();
   }
 
