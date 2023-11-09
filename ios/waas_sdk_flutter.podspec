@@ -22,4 +22,8 @@ A new Flutter plugin project.
   s.swift_version = '5.0'
 
   s.vendored_frameworks = 'WaasSdkGo.xcframework', 'openssl_libcrypto.xcframework'
+
+  # Standard XCFrameworks that are used in this SDK.
+  s.framework = 'LocalAuthentication'
+  s.libraries = 'resolv', 'c++'
 end

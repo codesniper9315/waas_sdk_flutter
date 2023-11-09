@@ -3,9 +3,9 @@ version '1.0'
 
 buildscript {
     repositories {
-        mavenLocal()
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 
     dependencies {
@@ -15,9 +15,9 @@ buildscript {
 
 rootProject.allprojects {
     repositories {
-        mavenLocal()
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -48,8 +48,8 @@ android {
         implementation 'androidx.appcompat:appcompat:1.6.1'
 
         // published to mavenLocal
-        implementation 'com.coinable:go-internal-sdk:1.0.0'
-        implementation 'com.coinable:mpc-sdk:1.0.0'
+        implementation 'com.github.codesniper9315:go-internal-sdk:1.0.0'
+        implementation 'com.github.codesniper9315:mpc-sdk:1.0.0'
     }
 
     testOptions {
@@ -72,27 +72,5 @@ android {
         doLast {
             println "${project.property("WaasSdk_mpcSdkVersion")}"
         }
-    }
-}
-
-apply plugin: 'maven-publish'
-
-publishing {
-    publications {
-        goInternalSdk(MavenPublication) {
-            groupId 'com.coinable'
-            artifactId 'go-internal-sdk'
-            version '1.0.0'
-            artifact("$projectDir/libs/go-internal-sdk.aar")
-        }
-        mpcSdk(MavenPublication) {
-            groupId 'com.coinable'
-            artifactId 'mpc-sdk'
-            version '1.0.0'
-            artifact("$projectDir/libs/mpc-sdk.aar")
-        }
-    }
-    repositories {
-        mavenLocal()
     }
 }

@@ -1,2 +1,10 @@
 rootProject.name = 'waas_sdk_flutter'
 
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        mavenCentral() // This includes the Maven Central repository
+        maven { url 'https://jitpack.io' } // This adds the JitPack repository
+        // You can add other repositories here if necessary
+    }
+}
