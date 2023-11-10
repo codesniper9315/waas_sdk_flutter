@@ -29,7 +29,7 @@ public class MPCWalletServiceHandler implements MethodCallHandler {
     public void onMethodCall(MethodCall call, Result result) {
         switch (call.method) {
             case "initialize":
-                initialize(call.argument("apiKeyName"), call.argument("privateKey"), result);
+                initialize(call.argument("apiKeyName"), call.argument("privateKey"), call.argument("proxyUrl"), result);
                 break;
             case "createMPCWallet":
                 createMPCWallet(call.argument("parent"), call.argument("device"), result);
@@ -62,14 +62,14 @@ public class MPCWalletServiceHandler implements MethodCallHandler {
      * Initializes the MPCWalletService with the given Cloud API Key parameters. Resolves
      * on success; rejects with an error otherwise.
      */
-    public void initialize(String apiKeyName, String privateKey, Result result) {
+    public void initialize(String apiKeyName, String privateKey, String proxyUrl, Result result) {
         if (walletsClient != null) {
             result.success(null);
             return;
         }
 
         try {
-            walletsClient = new com.coinbase.waassdk.MPCWalletService(apiKeyName, privateKey, null, executor);
+            walletsClient = new com.coinbase.waassdk.MPCWalletService(apiKeyName, privateKey, proxyUrl, executor);
             result.success(null);
         } catch (Exception e) {
             result.error(walletsErr,"initialize MPC wallet service failed : ", e);

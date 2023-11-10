@@ -42,7 +42,7 @@ public class MPCKeyServiceHandler implements MethodCallHandler {
     public void onMethodCall(MethodCall call, Result result) {
         switch (call.method) {
             case "initialize":
-                initialize(call.argument("apiKeyName"), call.argument("privateKey"), result);
+                initialize(call.argument("apiKeyName"), call.argument("privateKey"), call.argument("proxyUrl"), result);
                 break;
             case "registerDevice":
                 registerDevice(result);
@@ -108,13 +108,13 @@ public class MPCKeyServiceHandler implements MethodCallHandler {
      * Initializes the MPCKeyService  with the given parameters.
      * Resolves on success; rejects with an error otherwise.
      */
-    private void initialize(String apiKeyName, String privateKey, Result result) {
+    private void initialize(String apiKeyName, String privateKey, String proxyUrl, Result result) {
         if (keyClient != null) {
             result.success(null);
             return;
         }
         try {
-            keyClient = new com.coinbase.waassdk.MPCKeyService(apiKeyName, privateKey, null, this.executor);
+            keyClient = new com.coinbase.waassdk.MPCKeyService(apiKeyName, privateKey, proxyUrl, this.executor);
             result.success(null);
         } catch (Exception e) {
             result.error("Error", "initialize MPC key service failed: " + e.getMessage(), null);

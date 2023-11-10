@@ -64,9 +64,13 @@ class WaasSdkFlutter {
     return WaasSdkFlutterPlatform.instance.resetPasscode(newPasscode);
   }
 
-  Future<void> initMPCKeyService(String apiKeyName, String privateKey) {
+  Future<void> initMPCKeyService(
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
+  ) {
     return WaasSdkFlutterPlatform.instance
-        .initMPCKeyService(apiKeyName, privateKey);
+        .initMPCKeyService(apiKeyName, privateKey, proxyUrl);
   }
 
   Future<Map<String, dynamic>> registerDevice() {
@@ -169,13 +173,17 @@ class WaasSdkFlutter {
     return WaasSdkFlutterPlatform.instance.stopPollingForPendingDevices();
   }
 
-  Future<void> initMPCWalletService(String apiKeyName, String privateKey) {
+  Future<void> initMPCWalletService(
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
+  ) {
     return WaasSdkFlutterPlatform.instance
-        .initMPCWalletService(apiKeyName, privateKey);
+        .initMPCWalletService(apiKeyName, privateKey, proxyUrl);
   }
 
-  Future<Map<String, dynamic>> createMPCWallet(String parent, String device) {
-    return WaasSdkFlutterPlatform.instance.createMPCWallet(parent, device);
+  Future<Map<String, dynamic>> createMPCWallet(String poolID, String device) {
+    return WaasSdkFlutterPlatform.instance.createMPCWallet(poolID, device);
   }
 
   Future<Map<String, dynamic>> waitPendingMPCWallet(String operation) {
@@ -193,9 +201,13 @@ class WaasSdkFlutter {
     return WaasSdkFlutterPlatform.instance.getAddress(name);
   }
 
-  Future<void> initPoolService(String apiKeyName, String privateKey) {
+  Future<void> initPoolService(
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
+  ) {
     return WaasSdkFlutterPlatform.instance
-        .initPoolService(apiKeyName, privateKey);
+        .initPoolService(apiKeyName, privateKey, proxyUrl);
   }
 
   Future<Map<String, dynamic>> createPool(String displayName, String poolID) {

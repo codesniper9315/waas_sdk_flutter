@@ -116,10 +116,22 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<void> initMPCKeyService(String apiKeyName, String privateKey) async {
+  Future<void> initMPCKeyService(
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
+  ) async {
+    assert(
+      (apiKeyName != null && privateKey != null) || proxyUrl != null,
+      'Either apiKeyName and privateKey or proxyUrl should not be null',
+    );
     await mpcKeyServiceMethodChannel.invokeMethod(
       'initialize',
-      {'apiKeyName': apiKeyName, 'privateKey': privateKey},
+      {
+        'apiKeyName': apiKeyName,
+        'privateKey': privateKey,
+        'proxyUrl': proxyUrl
+      },
     );
   }
 
@@ -282,23 +294,32 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
 
   @override
   Future<void> initMPCWalletService(
-    String apiKeyName,
-    String privateKey,
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
   ) async {
+    assert(
+      (apiKeyName != null && privateKey != null) || proxyUrl != null,
+      'Either apiKeyName and privateKey or proxyUrl should not be null',
+    );
     return await mpcWalletServiceMethodChannel.invokeMethod(
       'initialize',
-      {'apiKeyName': apiKeyName, 'privateKey': privateKey},
+      {
+        'apiKeyName': apiKeyName,
+        'privateKey': privateKey,
+        'proxyUrl': proxyUrl
+      },
     );
   }
 
   @override
   Future<Map<String, dynamic>> createMPCWallet(
-    String parent,
+    String poolID,
     String device,
   ) async {
     return await mpcWalletServiceMethodChannel.invokeMethod(
       'createMPCWallet',
-      {'parent': parent, 'device': device},
+      {'parent': poolID, 'device': device},
     );
   }
 
@@ -330,10 +351,22 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<void> initPoolService(String apiKeyName, String privateKey) async {
+  Future<void> initPoolService(
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
+  ) async {
+    assert(
+      (apiKeyName != null && privateKey != null) || proxyUrl != null,
+      'Either apiKeyName and privateKey or proxyUrl should not be null',
+    );
     return await poolServiceMethodChannel.invokeMethod(
       'initialize',
-      {'apiKeyName': apiKeyName, 'privateKey': privateKey},
+      {
+        'apiKeyName': apiKeyName,
+        'privateKey': privateKey,
+        'proxyUrl': proxyUrl
+      },
     );
   }
 

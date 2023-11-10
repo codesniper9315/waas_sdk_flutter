@@ -1,4 +1,4 @@
-package com.coinable.waas_sdk_flutter;
+ package com.coinable.waas_sdk_flutter;
 
 import com.waassdkinternal.v1.Pool;
 
@@ -29,7 +29,7 @@ public class PoolServiceHandler implements MethodCallHandler {
     public void onMethodCall(MethodCall call, Result result) {
         switch (call.method) {
             case "initialize":
-                initialize(call.argument("apiKeyName"), call.argument("privateKey"), result);
+                initialize(call.argument("apiKeyName"), call.argument("privateKey"), call.argument("proxyUrl"), result);
                 break;
             case "createPool":
                 createPool(call.argument("displayName"), call.argument("poolID"), result);
@@ -44,14 +44,14 @@ public class PoolServiceHandler implements MethodCallHandler {
      * Initializes the PoolService with the given Cloud API Key parameters. Resolves on success;
      * rejects with an error otherwise.
      */
-    public void initialize(String apiKeyName, String privateKey, Result result) {
+    public void initialize(String apiKeyName, String privateKey, String proxyUrl, Result result) {
         if (poolClient != null) {
             result.success(null);
             return;
         }
 
         try {
-            poolClient = new com.coinbase.waassdk.PoolService(apiKeyName, privateKey, null, executor);
+            poolClient = new com.coinbase.waassdk.PoolService(apiKeyName, privateKey, proxyUrl, executor);
             result.success(null);
         } catch (Exception e) {
             result.error(poolsErr,"initialize pool failed : ", e);

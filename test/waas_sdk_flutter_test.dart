@@ -97,7 +97,11 @@ class MockWaasSdkFlutterPlatform
   }
 
   @override
-  Future<void> initMPCKeyService(String apiKeyName, String privateKey) {
+  Future<void> initMPCKeyService(
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
+  ) {
     throw UnimplementedError();
   }
 
@@ -107,12 +111,20 @@ class MockWaasSdkFlutterPlatform
   }
 
   @override
-  Future<void> initMPCWalletService(String apiKeyName, String privateKey) {
+  Future<void> initMPCWalletService(
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
+  ) {
     throw UnimplementedError();
   }
 
   @override
-  Future<void> initPoolService(String apiKeyName, String privateKey) {
+  Future<void> initPoolService(
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
+  ) {
     throw UnimplementedError();
   }
 

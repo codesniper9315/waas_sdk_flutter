@@ -83,7 +83,11 @@ abstract class WaasSdkFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('resetPasscode() has not been implemented');
   }
 
-  Future<void> initMPCKeyService(String apiKeyName, String privateKey) {
+  Future<void> initMPCKeyService(
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
+  ) {
     throw UnimplementedError('initMPCKeyService() has not been implemented');
   }
 
@@ -188,11 +192,15 @@ abstract class WaasSdkFlutterPlatform extends PlatformInterface {
         'stopPollingForPendingDevices() has not been implemented');
   }
 
-  Future<void> initMPCWalletService(String apiKeyName, String privateKey) {
+  Future<void> initMPCWalletService(
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
+  ) {
     throw UnimplementedError('initMPCWalletService() has not been implemented');
   }
 
-  Future<Map<String, dynamic>> createMPCWallet(String parent, String device) {
+  Future<Map<String, dynamic>> createMPCWallet(String poolID, String device) {
     throw UnimplementedError('createMPCWallet() has not been implemented');
   }
 
@@ -211,7 +219,11 @@ abstract class WaasSdkFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('getAddress() has not been implemented');
   }
 
-  Future<void> initPoolService(String apiKeyName, String privateKey) {
+  Future<void> initPoolService(
+    String? apiKeyName,
+    String? privateKey,
+    String? proxyUrl,
+  ) {
     throw UnimplementedError('initPoolService() has not been implemented');
   }
 
