@@ -24,7 +24,7 @@ class _PoolServicePageState extends State<PoolServicePage> {
         .initPoolService(
           Config.apiKeyName,
           Config.privateKey,
-          'https://waas.coinableapp.co',
+          '',
         )
         .then((_) => setState(() => _isInitialized = true));
   }

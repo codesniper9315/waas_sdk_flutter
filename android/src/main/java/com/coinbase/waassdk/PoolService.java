@@ -31,7 +31,7 @@ public class PoolService {
 
     String poolServiceUrl;
     
-    if (apiKeyName == "" && privateKey == "") {
+    if (apiKeyName.isEmpty() && privateKey.isEmpty()) {
       poolServiceUrl = proxyUrl;
       insecure = true;
     } else {

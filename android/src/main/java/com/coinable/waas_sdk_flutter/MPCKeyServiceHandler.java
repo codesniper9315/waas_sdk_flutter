@@ -148,8 +148,7 @@ public class MPCKeyServiceHandler implements MethodCallHandler {
         }
         try {
             // You may need to adjust this to match the expected output and WaasPromise structure in your SDK
-            Object response = keyClient.pollForPendingDeviceGroup(deviceGroup, pollInterval);
-            result.success(response);
+            WaasPromise.resolveMap(keyClient.pollForPendingDeviceGroup(deviceGroup, pollInterval), result, Utils::convertJsonToArray, this.executor);
         } catch (Exception e) {
             result.error("Error", e.getMessage(), null);
         }

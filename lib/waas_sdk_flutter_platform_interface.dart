@@ -91,7 +91,7 @@ abstract class WaasSdkFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('initMPCKeyService() has not been implemented');
   }
 
-  Future<Map<String, dynamic>> registerDevice() {
+  Future<dynamic> registerDevice() {
     throw UnimplementedError('registerDevice() has not been implemented');
   }
 
@@ -129,18 +129,18 @@ abstract class WaasSdkFlutterPlatform extends PlatformInterface {
         'stopPollingForPendingSignatures() has not been implemented');
   }
 
-  Future<Map<String, dynamic>> waitPendingSignature(String operation) {
+  Future<dynamic> waitPendingSignature(String operation) {
     throw UnimplementedError('waitPendingSignature() has not been implemented');
   }
 
-  Future<Map<String, dynamic>> getSignedTransaction(
+  Future<dynamic> getSignedTransaction(
     Map<String, dynamic> transaction,
     Map<String, dynamic> signature,
   ) {
     throw UnimplementedError('getSignedTransaction() has not been implemented');
   }
 
-  Future<Map<String, dynamic>> getDeviceGroup(String name) {
+  Future<dynamic> getDeviceGroup(String name) {
     throw UnimplementedError('getDeviceGroup() has not been implemented');
   }
 
@@ -200,22 +200,22 @@ abstract class WaasSdkFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('initMPCWalletService() has not been implemented');
   }
 
-  Future<Map<String, dynamic>> createMPCWallet(String poolID, String device) {
+  Future<dynamic> createMPCWallet(String poolID, String device) {
     throw UnimplementedError('createMPCWallet() has not been implemented');
   }
 
-  Future<Map<String, dynamic>> waitPendingMPCWallet(String operation) {
+  Future<dynamic> waitPendingMPCWallet(String operation) {
     throw UnimplementedError('waitPendingMPCWallet() has not been implemented');
   }
 
-  Future<Map<String, dynamic>> generateAddress(
+  Future<dynamic> generateAddress(
     String mpcWallet,
     String network,
   ) {
     throw UnimplementedError('generateAddress() has not been implemented');
   }
 
-  Future<Map<String, dynamic>> getAddress(String name) {
+  Future<dynamic> getAddress(String name) {
     throw UnimplementedError('getAddress() has not been implemented');
   }
 
@@ -227,7 +227,7 @@ abstract class WaasSdkFlutterPlatform extends PlatformInterface {
     throw UnimplementedError('initPoolService() has not been implemented');
   }
 
-  Future<Map<String, dynamic>> createPool(String displayName, String poolID) {
+  Future<dynamic> createPool(String displayName, String poolID) {
     throw UnimplementedError('createPool() has not been implemented');
   }
 }

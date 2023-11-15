@@ -73,7 +73,7 @@ class WaasSdkFlutter {
         .initMPCKeyService(apiKeyName, privateKey, proxyUrl);
   }
 
-  Future<Map<String, dynamic>> registerDevice() {
+  Future<dynamic> registerDevice() {
     return WaasSdkFlutterPlatform.instance.registerDevice();
   }
 
@@ -109,11 +109,11 @@ class WaasSdkFlutter {
     return WaasSdkFlutterPlatform.instance.stopPollingForPendingSignatures();
   }
 
-  Future<Map<String, dynamic>> waitPendingSignature(String operation) {
+  Future<dynamic> waitPendingSignature(String operation) {
     return WaasSdkFlutterPlatform.instance.waitPendingSignature(operation);
   }
 
-  Future<Map<String, dynamic>> getSignedTransaction(
+  Future<dynamic> getSignedTransaction(
     Map<String, dynamic> transaction,
     Map<String, dynamic> signature,
   ) {
@@ -121,7 +121,7 @@ class WaasSdkFlutter {
         .getSignedTransaction(transaction, signature);
   }
 
-  Future<Map<String, dynamic>> getDeviceGroup(String name) {
+  Future<dynamic> getDeviceGroup(String name) {
     return WaasSdkFlutterPlatform.instance.getDeviceGroup(name);
   }
 
@@ -182,22 +182,44 @@ class WaasSdkFlutter {
         .initMPCWalletService(apiKeyName, privateKey, proxyUrl);
   }
 
-  Future<Map<String, dynamic>> createMPCWallet(String poolID, String device) {
+  Future<dynamic> createMPCWallet(String poolID, String device) {
     return WaasSdkFlutterPlatform.instance.createMPCWallet(poolID, device);
   }
 
-  Future<Map<String, dynamic>> waitPendingMPCWallet(String operation) {
+  Future<void> computeMPCWallet(String deviceGroup, String passcode) async {
+    final pendingDeviceGroup = await pollForPendingDeviceGroup(deviceGroup, 0);
+
+    if (pendingDeviceGroup != null) {
+      for (int i = pendingDeviceGroup.length - 1; i >= 0; i--) {
+        var deviceGroupOperation = pendingDeviceGroup[i];
+        await computeMPCOperation(deviceGroupOperation['MPCData']);
+      }
+    }
+
+    final pendingDeviceArchiveOperations =
+        await pollForPendingDeviceArchives(deviceGroup, 0);
+
+    for (int i = pendingDeviceArchiveOperations.length - 1; i >= 0; i--) {
+      var pendingOperation = pendingDeviceArchiveOperations[i];
+      await computePrepareDeviceArchiveMPCOperation(
+          pendingOperation['MPCData'], passcode);
+    }
+
+    return;
+  }
+
+  Future<dynamic> waitPendingMPCWallet(String operation) {
     return WaasSdkFlutterPlatform.instance.waitPendingMPCWallet(operation);
   }
 
-  Future<Map<String, dynamic>> generateAddress(
+  Future<dynamic> generateAddress(
     String mpcWallet,
     String network,
   ) {
     return WaasSdkFlutterPlatform.instance.generateAddress(mpcWallet, network);
   }
 
-  Future<Map<String, dynamic>> getAddress(String name) {
+  Future<dynamic> getAddress(String name) {
     return WaasSdkFlutterPlatform.instance.getAddress(name);
   }
 
@@ -210,7 +232,7 @@ class WaasSdkFlutter {
         .initPoolService(apiKeyName, privateKey, proxyUrl);
   }
 
-  Future<Map<String, dynamic>> createPool(String displayName, String poolID) {
+  Future<dynamic> createPool(String displayName, String poolID) {
     return WaasSdkFlutterPlatform.instance.createPool(displayName, poolID);
   }
 }

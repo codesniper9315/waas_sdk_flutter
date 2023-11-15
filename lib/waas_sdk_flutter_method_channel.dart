@@ -136,7 +136,7 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<Map<String, dynamic>> registerDevice() async {
+  Future<dynamic> registerDevice() async {
     return await mpcKeyServiceMethodChannel.invokeMethod('registerDevice');
   }
 
@@ -145,7 +145,7 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
     String deviceGroup,
     int pollInterval,
   ) async {
-    await mpcKeyServiceMethodChannel.invokeMethod(
+    return await mpcKeyServiceMethodChannel.invokeMethod(
       'pollForPendingDeviceGroup',
       {'deviceGroup': deviceGroup, 'pollInterval': pollInterval},
     );
@@ -188,7 +188,7 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<Map<String, dynamic>> waitPendingSignature(String operation) async {
+  Future<dynamic> waitPendingSignature(String operation) async {
     return await mpcKeyServiceMethodChannel.invokeMethod(
       'waitPendingSignature',
       {'operation': operation},
@@ -196,7 +196,7 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<Map<String, dynamic>> getSignedTransaction(
+  Future<dynamic> getSignedTransaction(
     Map<String, dynamic> transaction,
     Map<String, dynamic> signature,
   ) async {
@@ -207,7 +207,7 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<Map<String, dynamic>> getDeviceGroup(String name) async {
+  Future<dynamic> getDeviceGroup(String name) async {
     return await mpcKeyServiceMethodChannel.invokeMethod(
       'getDeviceGroup',
       {'name': name},
@@ -313,7 +313,7 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<Map<String, dynamic>> createMPCWallet(
+  Future<dynamic> createMPCWallet(
     String poolID,
     String device,
   ) async {
@@ -324,7 +324,7 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<Map<String, dynamic>> waitPendingMPCWallet(String operation) async {
+  Future<dynamic> waitPendingMPCWallet(String operation) async {
     return await mpcWalletServiceMethodChannel.invokeMethod(
       'waitPendingMPCWallet',
       {'operation': operation},
@@ -332,7 +332,7 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<Map<String, dynamic>> generateAddress(
+  Future<dynamic> generateAddress(
     String mpcWallet,
     String network,
   ) async {
@@ -343,7 +343,7 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<Map<String, dynamic>> getAddress(String name) async {
+  Future<dynamic> getAddress(String name) async {
     return await mpcWalletServiceMethodChannel.invokeMethod(
       'getAddress',
       {'name': name},
@@ -371,10 +371,7 @@ class MethodChannelWaasSdkFlutter extends WaasSdkFlutterPlatform {
   }
 
   @override
-  Future<Map<String, dynamic>> createPool(
-    String displayName,
-    String poolID,
-  ) async {
+  Future<dynamic> createPool(String displayName, String poolID) async {
     return await poolServiceMethodChannel.invokeMethod(
       'createPool',
       {'displayName': displayName, 'poolID': poolID},
