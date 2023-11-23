@@ -1,5 +1,5 @@
 name: waas_sdk_flutter
-description: A new Flutter plugin project.
+description: The WaaS SDK is a client-side Flutter package that is required for key management operations. It exposes a subset of the WaaS APIs to the mobile developer.
 version: 0.0.1
 homepage: https://github.com/codesniper9315/waas_sdk_flutter
 
